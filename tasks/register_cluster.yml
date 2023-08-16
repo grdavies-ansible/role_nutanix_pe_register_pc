@@ -1,5 +1,5 @@
 ---
-- name: Register Nutanix PE cluster "{{ nutanix_host }}" to Prism Central "{{ nutanix_pc_register_pc_ip }}"
+- name: Register Nutanix PE cluster to Prism Central "{{ nutanix_pc_register_pc_ip }}"
   block:
     - name: Get Prism Element registration state
       uri:
@@ -10,7 +10,7 @@
           Authorization: "{{ nutanix_api_auth }}"
         status_code: 200
       register: nutanix_pc_register_current_state
-      no_log: True
+      no_log: true
 
     # - debug:
     #     var: nutanix_pc_register_current_state.json
@@ -34,7 +34,7 @@
           port: null
         status_code: 200
       register: nutanix_pc_register
-      no_log: True
+      no_log: true
       when: nutanix_pc_register_current_state.json | length == 0
 
     # - debug:

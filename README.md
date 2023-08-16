@@ -13,7 +13,7 @@ Inputs
 | nutanix_username                | yes      |         |                           | A valid username with appropriate rights to access the Nutanix API.                  |
 | nutanix_password                | yes      |         |                           | A valid password for the supplied username.                                          |
 | nutanix_port                    | no       | 9440    |                           | The Prism TCP port.                                                                  |
-| validate_certs                  | no       | no      | yes | no                  | Whether to check if Prism UI certificates are valid.                                 |
+| validate_certs                  | no       | false   | true / false              | Whether to check if Prism UI certificates are valid.                                 |
 | nutanix_pc_register_pc_ip       | yes      |         |                           | The IP address of the Prism Central to register with.                                |
 | nutanix_pc_register_pc_username | no       | "admin" |                           | The username to authenticate with Prism Central.                                     |
 | nutanix_pc_register_pc_password | yes      |         |                           | The password to authenticate with Prism Central.                                     |

@@ -1,6 +1,7 @@
 ---
 # tasks file for nutanix_role_prism_central_register_cluster
-- import_tasks: setup_api.yml
+- name: Setup connection to Nutanix API
+  ansible.builtin.include_tasks: setup_api.yml
 
 - name: "Task can only be run against Prism Element"
   ansible.builtin.fail:
@@ -8,9 +9,11 @@
   when:
     - nutanix_endpoint_prism_type != 'pe'
 
-- import_tasks: check_variables.yml
+- name: Check variables
+  ansible.builtin.import_tasks: check_variables.yml
 
-- import_tasks: register_cluster.yml
+- name: Register cluster
+  ansible.builtin.import_tasks: register_cluster.yml
 
 - name: Pause for 30 seconds to allow cluster registeration to finalize
   ansible.builtin.pause:

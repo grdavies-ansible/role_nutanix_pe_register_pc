@@ -1,5 +1,5 @@
 ---
-- name: Fail if "{{ nutanix_host }}" is not a Prism Element cluster
+- name: Fail if not a Prism Element cluster
   ansible.builtin.fail:
     msg: "this role can only be run from Prism Element (ie. a Nutanix cluster)"
   when:
@@ -25,4 +25,4 @@
   when:
     - nutanix_pc_register_pc_password is not defined
     - nutanix_pc_register_pc_password != ""
-  no_log: True
+  no_log: true
