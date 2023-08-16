@@ -1,0 +1,28 @@
+---
+- name: Fail if "{{ nutanix_host }}" is not a Prism Element cluster
+  ansible.builtin.fail:
+    msg: "this role can only be run from Prism Element (ie. a Nutanix cluster)"
+  when:
+    - nutanix_endpoint_prism_type != 'pe'
+
+- name: Fail if 'nutanix_pc_register_pc_ip' is not defined
+  ansible.builtin.fail:
+    msg: "the variable 'nutanix_pc_register_pc_ip' is not defined."
+  when:
+    - nutanix_pc_register_pc_ip is not defined
+    - nutanix_pc_register_pc_ip != ""
+
+- name: Fail if 'nutanix_pc_register_pc_username' is not defined
+  ansible.builtin.fail:
+    msg: "the variable 'nutanix_pc_register_pc_username' is not defined."
+  when:
+    - nutanix_pc_register_pc_username is not defined
+    - nutanix_pc_register_pc_username != ""
+
+- name: Fail if 'nutanix_pc_register_pc_password' is not defined
+  ansible.builtin.fail:
+    msg: "the variable 'nutanix_pc_register_pc_password' is not defined."
+  when:
+    - nutanix_pc_register_pc_password is not defined
+    - nutanix_pc_register_pc_password != ""
+  no_log: True
