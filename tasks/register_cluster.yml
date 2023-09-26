@@ -1,48 +1,46 @@
 ---
-- name: Register Nutanix PE cluster to Prism Central "{{ nutanix_pc_register_pc_ip }}"
-  block:
-    - name: Get Prism Element registration state
-      uri:
-        url: "https://{{ nutanix_host }}:{{ nutanix_port }}/PrismGateway/services/rest/v1/multicluster/cluster_external_state"
-        method: GET
-        validate_certs: "{{ validate_certs }}"
-        headers:
-          Authorization: "{{ nutanix_api_auth }}"
-        status_code: 200
-      register: nutanix_pc_register_current_state
-      no_log: true
+- name: Get Prism Element registration state
+  ansible.builtin.uri:
+    url: "https://{{ role_nutanix_prism_api_url_base }}/PrismGateway/services/rest/v1/multicluster/cluster_external_state"
+    method: GET
+    validate_certs: "{{ role_nutanix_pe_register_pc_certs }}"
+    headers:
+      Authorization: "{{ role_nutanix_prism_api_auth_string_b64 }}"
+    status_code: 200
+  register: role_nutanix_pe_register_pc_current_state
+  no_log: true
 
-    # - debug:
-    #     var: nutanix_pc_register_current_state.json
-    #
-    # - debug:
-    #     msg: "cluster not currently register to PC"
-    #   when: nutanix_pc_register_current_state.json | length == 0
+- name: Debug role_nutanix_pe_register_pc_current_state
+  ansible.builtin.debug:
+    var: role_nutanix_pe_register_pc_current_state
+  when: role_nutanix_pe_register_pc_debug
 
-    - name: Register Nutanix PE
-      uri:
-        url: "https://{{ nutanix_host }}:{{ nutanix_port }}/PrismGateway/services/rest/v1/multicluster/add_to_multicluster"
-        method: POST
-        validate_certs: "{{ validate_certs }}"
-        headers:
-          Authorization: "{{ nutanix_api_auth }}"
-        body_format: json
-        body:
-          ipAddresses: ["{{ nutanix_pc_register_pc_ip }}"]
-          username: "{{ nutanix_pc_register_pc_username }}"
-          password: "{{ nutanix_pc_register_pc_password }}"
-          port: null
-        status_code: 200
-      register: nutanix_pc_register
-      no_log: true
-      when: nutanix_pc_register_current_state.json | length == 0
+- name: " Register Nutanix PE to PC '{{ role_nutanix_pe_register_pc_ip }}'"
+  ansible.builtin.uri:
+    url: "https://{{ role_nutanix_prism_api_url_base }}/PrismGateway/services/rest/v1/multicluster/add_to_multicluster"
+    method: POST
+    validate_certs: "{{ role_nutanix_pe_register_pc_certs }}"
+    headers:
+      Authorization: "{{ role_nutanix_prism_api_auth_string_b64 }}"
+    body_format: json
+    body:
+      ipAddresses: ["{{ role_nutanix_pe_register_pc_ip }}"]
+      username: "{{ role_nutanix_pe_register_pc_prism_central_username }}"
+      password: "{{ role_nutanix_pe_register_pc_prism_central_password }}"
+      port: null
+    status_code: 200
+  register: role_nutanix_pe_register_pc_register
+  no_log: true
+  when: role_nutanix_pe_register_pc_current_state.json | length == 0
 
-    # - debug:
-    #     var: nutanix_pc_register
+- name: Debug role_nutanix_pe_register_pc_register
+  ansible.builtin.debug:
+    var: role_nutanix_pe_register_pc_register
+  when: role_nutanix_pe_register_pc_debug
 
-    - name: Cluster Prism Central registration failed
-      ansible.builtin.fail:
-        msg: "could not register cluster to prism central"
-      when:
-        - nutanix_pc_register_current_state.json | length == 0
-        - nutanix_pc_register.failed
+- name: Cluster Prism Central registration failed
+  ansible.builtin.fail:
+    msg: "could not register cluster to prism central"
+  when:
+    - role_nutanix_pe_register_pc_current_state.json | length == 0
+    - role_nutanix_pe_register_pc_register.failed

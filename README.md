@@ -9,19 +9,20 @@ Inputs
 
 | Variable                        | Required | Default | Choices                   | Comments                                                                             |
 |---------------------------------|----------|---------|---------------------------|--------------------------------------------------------------------------------------|
-| nutanix_host                    | yes      |         |                           | The IP address or FQDN for the Prism (Element only) to which you want to connect.    |
-| nutanix_username                | yes      |         |                           | A valid username with appropriate rights to access the Nutanix API.                  |
-| nutanix_password                | yes      |         |                           | A valid password for the supplied username.                                          |
-| nutanix_port                    | no       | 9440    |                           | The Prism TCP port.                                                                  |
-| validate_certs                  | no       | false   | true / false              | Whether to check if Prism UI certificates are valid.                                 |
-| nutanix_pc_register_pc_ip       | yes      |         |                           | The IP address of the Prism Central to register with.                                |
-| nutanix_pc_register_pc_username | no       | "admin" |                           | The username to authenticate with Prism Central.                                     |
-| nutanix_pc_register_pc_password | yes      |         |                           | The password to authenticate with Prism Central.                                     |
+| role_nutanix_pe_register_pc_host                    | yes      |         |                           | The IP address or FQDN for the Prism (Element only) to which you want to connect.    |
+| role_nutanix_pe_register_pc_username                | yes      |         |                           | A valid username with appropriate rights to access the Nutanix API.                  |
+| role_nutanix_pe_register_pc_password                | yes      |         |                           | A valid password for the supplied username.                                          |
+| role_nutanix_pe_register_pc_port                    | no       | 9440    |                           | The Prism TCP port.                                                                  |
+| role_nutanix_pe_register_pc_certs                  | no       | false   | true / false              | Whether to check if Prism UI certificates are valid.                                 |
+| role_nutanix_pe_register_pc_ip       | yes      |         |                           | The IP address of the Prism Central to register with.                                |
+| role_nutanix_pe_register_pc_prism_central_username | no       | "admin" |                           | The username to authenticate with Prism Central.                                     |
+| role_nutanix_pe_register_pc_prism_central_password | yes      |         |                           | The password to authenticate with Prism Central.                                     |
 
 
 ## Dependencies
 
-NA
+- grdavies.role_nutanix_prism_api
+- grdavies.role_nutanix_prism_monitor_task
 
 ## Example Playbook
 
@@ -31,12 +32,12 @@ NA
   roles:
     - grdavies.role_nutanix_pe_register_pc
   vars:
-    nutanix_host: 10.38.185.37
-    nutanix_username: admin
-    nutanix_password: nx2Tech165!
-    nutanix_pc_register_pc_ip: 10.38.185.39
-    nutanix_pc_register_pc_username: admin
-    nutanix_pc_register_pc_password: nx2Tech165!
+    role_nutanix_pe_register_pc_host: 10.38.185.37
+    role_nutanix_pe_register_pc_username: admin
+    role_nutanix_pe_register_pc_password: nx2Tech165!
+    role_nutanix_pe_register_pc_ip: 10.38.185.39
+    role_nutanix_pe_register_pc_prism_central_username: admin
+    role_nutanix_pe_register_pc_prism_central_password: nx2Tech165!
 ```
 
 ## License

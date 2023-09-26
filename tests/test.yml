@@ -4,9 +4,9 @@
   roles:
     - role: ../..
   vars:
-    nutanix_host: 10.38.179.37
-    nutanix_username: admin
-    nutanix_password: nx2Tech283!
-    nutanix_pc_register_pc_ip: 10.38.179.39
-    nutanix_pc_register_pc_username: admin
-    nutanix_pc_register_pc_password: nx2Tech283!
+    role_nutanix_pe_register_pc_host: 10.38.11.199
+    role_nutanix_pe_register_pc_username: admin
+    role_nutanix_pe_register_pc_password: nx2Tech682!
+    role_nutanix_pe_register_pc_ip: 10.38.11.240
+    role_nutanix_pe_register_pc_prism_central_username: admin
+    role_nutanix_pe_register_pc_prism_central_password: nx2Tech682!

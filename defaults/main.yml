@@ -1,8 +1,9 @@
 ---
 # defaults file for nutanix_role_prism_central_register_cluster
-nutanix_host: ""
-nutanix_username: ""
-nutanix_password: ""
-nutanix_port: 9440
-validate_certs: false
-nutanix_pc_register_pc_username: admin
+role_nutanix_pe_register_pc_host: ""
+role_nutanix_pe_register_pc_username: ""
+role_nutanix_pe_register_pc_password: ""
+role_nutanix_pe_register_pc_port: 9440
+role_nutanix_pe_register_pc_certs: false
+role_nutanix_pe_register_pc_prism_central_username: admin
+role_nutanix_pe_register_pc_debug: false
