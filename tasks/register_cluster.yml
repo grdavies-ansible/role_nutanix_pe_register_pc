@@ -3,7 +3,7 @@
   ansible.builtin.uri:
     url: "https://{{ role_nutanix_prism_api_url_base }}/PrismGateway/services/rest/v1/multicluster/cluster_external_state"
     method: GET
-    validate_certs: "{{ role_nutanix_pe_register_pc_certs }}"
+    validate_certs: "{{ role_nutanix_pe_register_pc_host_validate_certs }}"
     headers:
       Authorization: "{{ role_nutanix_prism_api_auth_string_b64 }}"
     status_code: 200
@@ -19,14 +19,14 @@
   ansible.builtin.uri:
     url: "https://{{ role_nutanix_prism_api_url_base }}/PrismGateway/services/rest/v1/multicluster/add_to_multicluster"
     method: POST
-    validate_certs: "{{ role_nutanix_pe_register_pc_certs }}"
+    validate_certs: "{{ role_nutanix_pe_register_pc_host_validate_certs }}"
     headers:
       Authorization: "{{ role_nutanix_prism_api_auth_string_b64 }}"
     body_format: json
     body:
       ipAddresses: ["{{ role_nutanix_pe_register_pc_ip }}"]
-      username: "{{ role_nutanix_pe_register_pc_prism_central_username }}"
-      password: "{{ role_nutanix_pe_register_pc_prism_central_password }}"
+      username: "{{ role_nutanix_pe_register_pc_username }}"
+      password: "{{ role_nutanix_pe_register_pc_password }}"
       port: null
     status_code: 200
   register: role_nutanix_pe_register_pc_register
