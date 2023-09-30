@@ -2,7 +2,6 @@
 
 This Ansible role will register a Nutanix cluster to a Prism Central instance. This role should will only run against a Nutanix cluster
 
-
 ## Role Variables
 
 Inputs
@@ -14,10 +13,10 @@ Inputs
 | role_nutanix_pe_register_pc_host_password           | yes      |         |                           | A valid password for the supplied username.                                          |
 | role_nutanix_pe_register_pc_host_port               | no       | 9440    |                           | The Prism TCP port.                                                                  |
 | role_nutanix_pe_register_pc_host_validate_certs     | no       | false   | true / false              | Whether to check if Prism UI certificates are valid.                                 |
+| role_nutanix_pe_register_pc_debug                   | no       | false   | true / false              | Enable debug logging.                                                                |
 | role_nutanix_pe_register_pc_ip                      | yes      |         |                           | The IP address of the Prism Central to register with.                                |
 | role_nutanix_pe_register_pc_username                | no       | "admin" |                           | The username to authenticate with Prism Central.                                     |
 | role_nutanix_pe_register_pc_password                | yes      |         |                           | The password to authenticate with Prism Central.                                     |
-
 
 ## Dependencies
 
@@ -26,7 +25,7 @@ Inputs
 
 ## Example Playbook
 
-```
+```YAML
 - hosts: localhost
   gather_facts: false
   roles:
