@@ -44,3 +44,8 @@
   when:
     - role_nutanix_pe_register_pc_current_state.json | length == 0
     - role_nutanix_pe_register_pc_register.failed
+
+- name: Pause for 30 seconds to allow cluster registeration to finalize
+  ansible.builtin.pause:
+    seconds: 30
+  when: role_nutanix_pe_register_pc_register.changed

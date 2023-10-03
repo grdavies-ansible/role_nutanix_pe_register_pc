@@ -22,7 +22,3 @@
 
 - name: Register cluster
   ansible.builtin.import_tasks: register_cluster.yml
-
-- name: Pause for 30 seconds to allow cluster registeration to finalize
-  ansible.builtin.pause:
-    seconds: 30

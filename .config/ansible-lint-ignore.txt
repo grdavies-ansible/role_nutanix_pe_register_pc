@@ -1,1 +1,2 @@
 tasks/main.yml yaml[line-length]
+tasks/register_cluster.yml no-handler
